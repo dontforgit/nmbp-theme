@@ -67,7 +67,6 @@ CREATE TABLE wp_family_relationships
   family_id BIGINT(20) NOT NULL, 
   active BOOLEAN NOT NULL DEFAULT 1
 );
---
 
 ```
 
