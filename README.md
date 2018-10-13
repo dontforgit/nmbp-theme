@@ -25,7 +25,51 @@ I am selling usage of this site to friends and family. I do not expect royalties
 
 ### Database Setup
 
-* `CREATE TABLE ;`
+```mysql
+
+/** Gift Table **/
+CREATE TABLE wp_gift
+(
+  id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT(20) NOT NULL,
+  quantity BIGINT(20) NOT NULL,
+  link BLOB,
+  price VARCHAR(20),
+  title VARCHAR(64),
+  notes BLOB,
+  remaining BIGINT(20),
+  active BOOLEAN NOT NULL DEFAULT 1,
+);
+ 
+/** Claimed Table **/
+CREATE TABLE wp_claimed
+(
+  id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id BIGINT(20) NOT NULL,
+  gift_id BIGINT(20) NOT NULL,
+  quantity INT(20) NOT NULL,
+  active BOOLEAN NOT NULL DEFAULT 1
+);
+ 
+/**  Famiily Table **/
+CREATE TABLE wp_families
+(
+  id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+  name VARCHAR(20) NOT NULL, 
+  active BOOLEAN NOT NULL DEFAULT 1
+);
+ 
+/** Family Relationships **/
+CREATE TABLE wp_family_relationships
+(
+  id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+  user_id BIGINT(20) NOT NULL, 
+  family_id BIGINT(20) NOT NULL, 
+  active BOOLEAN NOT NULL DEFAULT 1
+);
+--
+
+```
 
 ## Conclusion
 
