@@ -1,5 +1,11 @@
 # No More Bad Presents
 
+## Disclaimer
+
+Yes, I know that this is not the correct way to build upon a parent theme. This code should not be taken as a representation of the quality of code that I am accustomed to writing. My family is literally begging me to rebuild this site and I simply don't have the time to do it any other way. 
+
+Maybe next year. :)
+
 ## Introduction
 
 This website was made so that families could quickly and easily share their Christmas lists with one another. 
