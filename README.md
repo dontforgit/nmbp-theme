@@ -29,6 +29,12 @@ I am selling usage of this site to friends and family. I do not expect royalties
 
 ## Setup
 
+### Page Setup
+
+- Create `/my-list-submit/`
+- Create `/christmas-list/`
+- Create `/add-to-my-family/`
+
 ### Database Setup
 
 ```mysql
@@ -39,6 +45,7 @@ CREATE TABLE wp_gift
   id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id BIGINT(20) NOT NULL,
   quantity BIGINT(20) NOT NULL,
+  desire INT,
   link BLOB,
   price VARCHAR(20),
   title VARCHAR(64),
@@ -62,6 +69,7 @@ CREATE TABLE wp_families
 (
   id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY, 
   name VARCHAR(20) NOT NULL, 
+  hoh_id VARCHAR(20) NOT NULL DEFAULT 0,
   active BOOLEAN NOT NULL DEFAULT 1
 );
  
@@ -72,6 +80,14 @@ CREATE TABLE wp_family_relationships
   user_id BIGINT(20) NOT NULL, 
   family_id BIGINT(20) NOT NULL, 
   active BOOLEAN NOT NULL DEFAULT 1
+);
+ 
+/** Licencing available **/
+CREATE TABLE wp_family_license
+(
+  id BIGINT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  family_id BIGINT(20) NOT NULL,
+  available BOOLEAN NOT NULL DEFAULT 1
 );
 
 ```

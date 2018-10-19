@@ -1,17 +1,4 @@
 <?php
-/**
- * - id
- * - user_id
- * - quantity -- dropdown
- * - link
- * price -- text
- * - title
- * notes -- textarea
- * - remaining
- * - active
- * - desire -- dropdown
- */
-
 // @todo - Add js validation for form field submission
 
 $iUserID = get_current_user_id();

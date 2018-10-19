@@ -1,18 +1,5 @@
 <?php
 
-/**
- * - id
- * - user_id
- * - quantity -- dropdown
- * - desire -- dropdown
- * - link
- * price -- text
- * - title
- * notes -- textarea
- * - remaining
- * - active
- */
-
 $data = array(
     'user_id' => $_POST['user_id'],
     'quantity' => $_POST['gift_quantity'],
