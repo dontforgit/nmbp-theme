@@ -46,9 +46,9 @@ class AddUser
      * Creates a WP user.
      *
      * @param string $sUsername
-     *            The username to be added.
+     *    The username to be added.
      * @param string $sEmail
-     *            The email to be added.
+     *    The email to be added.
      *
      * @return int|object Returns user_id on success, WP Error Object on failure.
      */
@@ -190,7 +190,7 @@ class AddUser
      * This returns 0 as 0 is not a valid id for a db index.
      *
      * @param string $sKey
-     *            The key to be checked.
+     *    The key to be checked.
      *
      * @return mixed
      */
