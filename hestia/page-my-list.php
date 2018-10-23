@@ -30,6 +30,7 @@ do_action( 'hestia_before_single_page_wrapper' );
                     get_template_part( 'template-parts/content', 'page' );
                     get_template_part( 'nmbp/add-to-my-list' );
                     get_template_part( 'nmbp/display-my-list' );
+                    get_template_part( 'nmbp/display-my-claimed' );
                 endwhile;
             else :
                 get_template_part( 'template-parts/content', 'none' );
