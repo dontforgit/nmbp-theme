@@ -12,7 +12,7 @@ $iUserID = get_current_user_id();
 
     <div class="row">
         <!-- Family Group -->
-        <h3><?php echo $sFamilyName ?></h3>
+        <h3 class="family-name"><?php echo $sFamilyName ?></h3>
 
         <!-- Person -->
         <?php foreach ($aFamilyMembers as $sFamilyMemberName => $aGiftList) : ?>
@@ -20,14 +20,18 @@ $iUserID = get_current_user_id();
             $iFirstArrayKey = key($aGiftList);
             if ($aGiftList[$iFirstArrayKey]->user_id != $iUserID) : ?>
 
-                <h4><?php echo $sFamilyMemberName; ?></h4>
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-4"><p><strong>Gift</strong></p></div>
-                        <div class="col-md-1"><p><strong>Price</strong></p></div>
-                        <div class="col-md-1"><p><strong>Desire</strong></p></div>
-                        <div class="col-md-1"><p><strong># Left</strong></p></div>
-                        <div class="col-md-5"><p><strong>Notes</strong></p></div>
+                <h4 class="family-member-name">
+                    <?php // @todo Dashicons-yes on having purchased something ?>
+                    <span class="dashicons dashicons-arrow-up-alt2"></span>
+                    <?php echo $sFamilyMemberName; ?>'s Christmas List
+                </h4>
+                <div class="col-md-12 family-member-gift-container">
+                    <div class="row table-heading">
+                        <div class="col-md-4 hidden-sm hidden-xs"><p><strong>Gift</strong></p></div>
+                        <div class="col-md-1 hidden-sm hidden-xs"><p><strong>Price</strong></p></div>
+                        <div class="col-md-1 hidden-sm hidden-xs"><p><strong>Desire</strong></p></div>
+                        <div class="col-md-1 hidden-sm hidden-xs"><p><strong># Left</strong></p></div>
+                        <div class="col-md-5 hidden-sm hidden-xs"><p><strong>Notes</strong></p></div>
                     </div>
 
                     <!-- Single Gift -->
@@ -35,6 +39,7 @@ $iUserID = get_current_user_id();
                         <div class="row individual-gift">
                             <div class="col-md-4">
                                 <p>
+                                    <span class="visible-sm visible-xs" style="font-weight:bold;">Gift: </span>
                                     <?php if ($oGift->remaining > 0) : ?>
                                         <span class="dashicons dashicons-plus"
                                               data-toggle="modal"
@@ -44,7 +49,7 @@ $iUserID = get_current_user_id();
                                               data-remaining="<?php echo $oGift->remaining; ?>"
                                         ></span>&nbsp;
                                     <?php else : ?>
-                                        <span class="dashicons dashicons-smiley"></span>&nbsp;
+                                        <span class="dashicons dashicons-lock"></span>&nbsp;
                                     <?php endif; ?>
 
 
@@ -57,13 +62,32 @@ $iUserID = get_current_user_id();
                                     <?php endif; ?>
                                 </p>
                             </div>
-                            <div class="col-md-1"><p><?php echo $oGift->price; ?></p></div>
-                            <div class="col-md-1"><p><?php echo $oGift->desire; ?></p></div>
-                            <div class="col-md-1"><p><?php echo $oGift->remaining; ?></p></div>
-                            <div class="col-md-5"><p><?php echo $oGift->notes; ?></p></div>
+                            <div class="col-md-1">
+                                <p>
+                                    <span class="visible-sm visible-xs" style="font-weight:bold;">Price: </span>
+                                    <?php echo $oGift->price; ?>
+                                </p>
+                            </div>
+                            <div class="col-md-1">
+                                <p>
+                                    <span class="visible-sm visible-xs" style="font-weight:bold;">Desire: </span>
+                                    <?php echo $oGift->desire; ?>
+                                </p>
+                            </div>
+                            <div class="col-md-1">
+                                <p>
+                                    <span class="visible-sm visible-xs" style="font-weight:bold;">Remaining: </span>
+                                    <?php echo $oGift->remaining; ?>
+                                </p>
+                            </div>
+                            <div class="col-md-5">
+                                <p>
+                                    <span class="visible-sm visible-xs" style="font-weight:bold;">Notes: </span>
+                                    <?php echo $oGift->notes; ?>
+                                </p>
+                            </div>
                         </div>
                     <?php endforeach; ?>
-
                 </div>
             <?php endif; ?>
         <?php endforeach; ?>
@@ -93,56 +117,3 @@ $iUserID = get_current_user_id();
         </div>
     </div>
 </div>
-
-<script tyle="text/javascript">
-    jQuery(document).ready(function(){
-
-        var $oPlusIcons = jQuery('.dashicons-plus');
-        var $oClaimSubmit = jQuery('#claim-submit');
-        var iUserID = <?php echo $iUserID; ?>
-
-        $oPlusIcons.click(function(){
-            var iRemaining = jQuery(this).data('remaining');
-            var sTitle = jQuery(this).data('title');
-            var iGiftID = jQuery(this).data('gift_id');
-            var sOptionHTML = '';
-            for (var i = iRemaining; i >= 0; i--) {
-                sOptionHTML += '<option value="' + i + '">' + i + '</option>';
-            }
-
-            jQuery('#claim-gift_quantity').html(sOptionHTML);
-            jQuery('#claim-gift-title').html(sTitle);
-            jQuery('#claim-gift-gift_id').val(iGiftID);
-        });
-
-        $oClaimSubmit.click(function(){
-
-            var data = {
-                "user_id" : iUserID,
-                "gift_id" : jQuery('#claim-gift-gift_id').val(),
-                "quantity" : jQuery('#claim-gift_quantity').val(),
-                "action" : "claimGift"
-            };
-
-            jQuery.post( "<?php echo get_template_directory_uri(); ?>/nmbp/ajax.php", data, function(data){
-                var sHTML = '<p>' + data + '.. This page will refresh in 10 seconds.';
-                sHTML += '<br/><br/> -OR- <br/><br/>';
-                sHTML += '<a href="/christmas-list/">REFRESH NOW!</a></p>';
-
-                jQuery('#claim-gift-modal-body').html(sHTML);
-                setTimeout(function(){
-                    location.reload();
-                }, 10000);
-            });
-        });
-
-    });
-</script>
-<style>
-    .individual-gift span.dashicons-plus {
-        color: red;
-    }
-    .individual-gift span.dashicons-plus:hover {
-        cursor: pointer;
-    }
-</style>

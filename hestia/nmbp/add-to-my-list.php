@@ -1,10 +1,11 @@
 <?php
 // @todo - Add js validation for form field submission
-
 $iUserID = get_current_user_id();
-
 ?>
-<div class="row">
+
+<button type="button" class="btn btn-primary" id="add-list-button" style="display:block;margin:auto;">Add To My Christmas List</button>
+<br/>
+<div class="row" id="add-list-form">
     <form action="/my-list-submit/" method="post">
         <div class="form-group col-md-6">
             <label for="gift_title">Gift</label>

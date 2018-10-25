@@ -9,11 +9,17 @@
 // Include custom functions
 include dirname(__FILE__) . '/nmbp/functions.php';
 
+// Queue up scripts and styles for later
+// @todo: Take out the cache bust.
+wp_enqueue_script('claim-gift', get_template_directory_uri() . '/nmbp/js/release.js', array('jquery'), date('YmdHis'));
+wp_enqueue_style('common-css', get_template_directory_uri() . '/nmbp/css/common.css', false, date('YmdHis'));
+
 get_header();
 
 do_action( 'hestia_before_single_page_wrapper' );
 
 ?>
+<div id="this_user_is" data-user_id="<?php echo get_current_user_id();?>"></div>
 <div class="<?php echo hestia_layout(); ?>">
     <?php
     $class_to_add = '';

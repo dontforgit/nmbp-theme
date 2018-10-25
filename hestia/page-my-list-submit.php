@@ -15,4 +15,4 @@ $data = array(
 global $wpdb;
 $wpdb->insert('wp_gift', $data);
 
-header('Location: /christmas-list/');
+header('Location: /my-list/');
