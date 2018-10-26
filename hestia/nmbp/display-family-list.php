@@ -20,7 +20,7 @@ $iUserID = get_current_user_id();
             $iFirstArrayKey = key($aGiftList);
             if ($aGiftList[$iFirstArrayKey]->user_id != $iUserID) : ?>
 
-                <h4 class="family-member-name">
+                <h4 class="family-member-name family-member-<?php echo str_replace(' ', '-', $sFamilyMemberName); ?>">
                     <?php // @todo Dashicons-yes on having purchased something ?>
                     <span class="dashicons dashicons-arrow-up-alt2"></span>
                     <?php echo $sFamilyMemberName; ?>'s Christmas List
@@ -36,7 +36,7 @@ $iUserID = get_current_user_id();
 
                     <!-- Single Gift -->
                     <?php foreach ($aGiftList as $oGift) : ?>
-                        <div class="row individual-gift">
+                        <div class="row individual-gift this-is-gift-<?php echo $oGift->id; ?>">
                             <div class="col-md-4">
                                 <p>
                                     <span class="visible-sm visible-xs" style="font-weight:bold;">Gift: </span>
@@ -118,3 +118,20 @@ $iUserID = get_current_user_id();
         </div>
     </div>
 </div>
+
+<?php
+global $wpdb;
+$sSQL = "SELECT * FROM wp_claimed  c
+        LEFT JOIN wp_gift g on c.gift_id = g.id
+        LEFT JOIN wp_users u on g. user_id = u.ID";
+$aResults = $wpdb->get_results($sSQL);
+?>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+        <?php foreach ($aResults as $oResult) : ?>
+            jQuery(".family-member-<?php echo str_replace(' ', '-', $oResult->display_name); ?>").css('background-color','rgba(7,86,0,0.15)');
+            jQuery(".this-is-gift-<?php echo $oResult->gift_id; ?>").css('background-color','rgba(7,86,0,0.075)');
+            jQuery('.this-is-gift-<?php echo $oResult->gift_id; ?>').find('.dashicons').addClass('dashicons-yes').removeClass('.dashicons-lock').removeClass('.dashicons-plus');
+        <?php endforeach; ?>
+    });
+</script>
