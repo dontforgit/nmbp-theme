@@ -22,3 +22,15 @@ function echo_pre($vVariable, $bDie = false)
         die;
     }
 }
+
+function is_josh()
+{
+    if (get_current_user_id() == 2) {
+        return true;
+    }
+    return false;
+}
+
+if (!current_user_can('manage_options')) {
+    show_admin_bar(false);
+}

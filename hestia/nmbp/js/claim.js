@@ -20,7 +20,7 @@ jQuery(document).ready(function(){
     });
 
     $oClaimSubmit.click(function(){
-
+        var sBaseURL = jQuery('#claim-gift-base_url').val();
         var data = {
             "user_id" : iUserID,
             "gift_id" : jQuery('#claim-gift-gift_id').val(),
@@ -28,7 +28,9 @@ jQuery(document).ready(function(){
             "action" : "claimGift"
         };
 
-        jQuery.post( "<?php echo get_template_directory_uri(); ?>/nmbp/ajax.php", data, function(data){
+        console.log(sBaseURL);
+
+        jQuery.post( sBaseURL + "/nmbp/ajax.php", data, function(data){
             var sHTML = '<p>' + data + '.. This page will refresh in 10 seconds.';
             sHTML += '<br/><br/> -OR- <br/><br/>';
             sHTML += '<a href="/christmas-list/">REFRESH NOW!</a></p>';

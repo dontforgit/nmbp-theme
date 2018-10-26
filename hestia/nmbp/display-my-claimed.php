@@ -11,7 +11,7 @@ global $wpdb;
 $iUserID = get_current_user_id();
 
 // Get my gifts, thx
-$sSQL = "SELECT c.*, g.link, g.price, g.title as 'gift', g.notes, u.*
+$sSQL = "SELECT c.*, g.link, g.price, g.title as 'gift', g.notes, g.desire, u.*
         FROM wp_claimed c
         LEFT JOIN wp_gift g on c.gift_id = g.id
         LEFT JOIN wp_users u on g.user_id = u.ID
@@ -88,11 +88,12 @@ foreach ($aGifts as $sFamilyMember => $aGiftList) : ?>
                 <input type="hidden" name="user_id" value="<?php echo $iUserID; ?>" />
                 <input type="hidden" name="gift_id" id="release-gift-gift_id" value="" />
                 <input type="hidden" name="claim_id" id="release-gift-claimed_id" value="" />
+                <input type="hidden" name="base_url" id="claim-gift-base_url" value="<?php echo get_template_directory_uri(); ?>" />
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="claim-submit">Release</button>
+                <button type="button" class="btn btn-primary" id="release-submit">Release</button>
             </div>
         </div>
     </div>

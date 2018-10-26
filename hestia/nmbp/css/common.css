@@ -46,7 +46,9 @@ div.row.individual-gift:last-child {
 .individual-gift span.dashicons-minus:hover,
 .individual-gift span.dashicons-plus:hover,
 span.dashicons-arrow-up-alt2:hover,
-span.dashicons-arrow-down-alt2:hover {
+span.dashicons-arrow-down-alt2:hover,
+span.dashicons-dismiss:hover,
+span.dashicons-edit:hover {
     cursor: pointer;
 }
 span.dashicons-arrow-up-alt2, span.dashicons-arrow-down-alt2 {
@@ -57,7 +59,7 @@ span.dashicons-arrow-up-alt2, span.dashicons-arrow-down-alt2 {
 .dashicons-plus {
     color: #075600;
 }
-.dashicons-minus {
+.dashicons-minus, .dashicons-dismiss {
     color: darkred;
 }
 .dashicons-lock {

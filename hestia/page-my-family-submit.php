@@ -1,7 +1,4 @@
 <?php
-/**
- * // @todo: Add doc block
- */
 
 // Include custom functions
 include dirname(__FILE__) . '/nmbp/functions.php';
@@ -14,7 +11,7 @@ $iUserID = get_current_user_id();
 $sSQL = "SELECT l.* FROM wp_families f 
         LEFT JOIN wp_family_relationships r ON f.id = r.family_id
         LEFT JOIN wp_family_license l ON f.id = l.family_id
-        WHERE f.active = 1 AND r.active = 1 AND f.hoh_id = {$iUserID} AND l.available = 1;";
+        WHERE f.active = 1 AND f.hoh_id = {$iUserID} AND l.available = 1;";
 $oResults = $wpdb->get_results($sSQL);
 $iLicensesAvailable = count($oResults);
 $sResponseClass = '';

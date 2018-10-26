@@ -108,6 +108,7 @@ $iUserID = get_current_user_id();
                 <select class="form-control" id="claim-gift_quantity" name="claim-gift_quantity"></select>
                 <input type="hidden" name="user_id" value="<?php echo $iUserID; ?>" />
                 <input type="hidden" name="gift_id" id="claim-gift-gift_id" value="" />
+                <input type="hidden" id="claim-gift-base_url" value="<?php echo get_template_directory_uri(); ?>" />
             </div>
 
             <div class="modal-footer">

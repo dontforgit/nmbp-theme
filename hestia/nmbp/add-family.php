@@ -85,7 +85,7 @@ if ($iLicensesAvailable > 0) :
 <?php else : ?>
     <div class="row">
         <div class="col-md-12">
-            <p class="text-center">Sorry, but you do not have any more licenses...</p>
+            <p class="text-center">Sorry, but you either don't have access to this page or any more licenses...</p>
         </div>
     </div>
 <?php endif; ?>

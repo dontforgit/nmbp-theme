@@ -10,9 +10,8 @@
 include dirname(__FILE__) . '/nmbp/functions.php';
 
 // Queue up scripts and styles for later
-// @todo: Take out the cache bust.
-wp_enqueue_script('claim-gift', get_template_directory_uri() . '/nmbp/js/release.js', array('jquery'), date('YmdHis'));
-wp_enqueue_style('common-css', get_template_directory_uri() . '/nmbp/css/common.css', false, date('YmdHis'));
+wp_enqueue_script('claim-gift', get_template_directory_uri() . '/nmbp/js/release.js', array('jquery'));
+wp_enqueue_style('common-css', get_template_directory_uri() . '/nmbp/css/common.css');
 
 get_header();
 
@@ -30,17 +29,28 @@ do_action( 'hestia_before_single_page_wrapper' );
     <div class="blog-post <?php esc_attr( $class_to_add ); ?>">
         <div class="container">
             <?php
-            if ( have_posts() ) :
-                while ( have_posts() ) :
-                    the_post();
-                    get_template_part( 'template-parts/content', 'page' );
-                    get_template_part( 'nmbp/add-to-my-list' );
-                    get_template_part( 'nmbp/display-my-list' );
-                    get_template_part( 'nmbp/display-my-claimed' );
-                endwhile;
-            else :
-                get_template_part( 'template-parts/content', 'none' );
-            endif;
+            if (!is_user_logged_in()) {
+                ?>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Please log in to view this page: </h3>
+                        <?php wp_login_form(); ?>
+                    </div>
+                </div>
+                <?php
+            } else {
+                if (have_posts()) :
+                    while (have_posts()) :
+                        the_post();
+                        get_template_part('template-parts/content', 'page');
+                        get_template_part('nmbp/add-to-my-list');
+                        get_template_part('nmbp/display-my-list');
+                        get_template_part('nmbp/display-my-claimed');
+                    endwhile;
+                else :
+                    get_template_part('template-parts/content', 'none');
+                endif;
+            }
             ?>
         </div>
     </div>

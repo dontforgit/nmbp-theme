@@ -1,5 +1,4 @@
 <?php
-// @todo - Add js validation for form field submission
 $iUserID = get_current_user_id();
 ?>
 
@@ -16,7 +15,7 @@ $iUserID = get_current_user_id();
             <input type="text" class="form-control" id="gift_link" name="gift_link" placeholder="Link to the gift (if there is one)">
         </div>
         <div class="form-group col-md-4">
-            <label for="gift_price">Gift</label>
+            <label for="gift_price">Price</label>
             <input type="text" class="form-control" id="gift_price" name="gift_price" placeholder="Enter price of the gift">
         </div>
         <div class="form-group col-md-4">
