@@ -29,11 +29,11 @@ switch ($_POST['action']) {
 
 function claimGift($aPost)
 {
-    $bContinue = helperArrayHasAllKeys($aPost, array('gift_id', 'user_id', 'quantity'));
-
-    if ($bContinue === false) {
-        returnJson("Error: The required fields were not set correctly.");
-    }
+//    $bContinue = helperArrayHasAllKeys($aPost, array('gift_id', 'user_id', 'quantity'));
+//
+//    if ($bContinue === false) {
+//        returnJson("Error: The required fields were not set correctly.");
+//    }
 
     // set easy vars
     $user_id = $aPost['user_id'];
@@ -54,11 +54,11 @@ function claimGift($aPost)
 
 function deleteGift($aPost)
 {
-    $bContinue = helperArrayHasAllKeys($aPost, array('gift_id'));
-
-    if ($bContinue === false) {
-        returnJson("Error: Something went wrong on my end. Cannot delete the gift at this time.");
-    }
+//    $bContinue = helperArrayHasAllKeys($aPost, array('gift_id'));
+//
+//    if ($bContinue === false) {
+//        returnJson("Error: Something went wrong on my end. Cannot delete the gift at this time.");
+//    }
 
     // set easy vars
     $gift_id = $aPost['gift_id'];
@@ -78,10 +78,10 @@ function deleteGift($aPost)
 
 function editGift($aPost)
 {
-    $bContinue = helperArrayHasAllKeys($aPost, array('gift_id', 'gift_title', 'gift_price', 'gift_link', 'gift_notes', 'gift_quantity', 'gift_desire'));
-    if ($bContinue === false) {
-        returnJson("Error: The required fields were not set correctly.");
-    }
+//    $bContinue = helperArrayHasAllKeys($aPost, array('gift_id', 'gift_title', 'gift_price', 'gift_link', 'gift_notes', 'gift_quantity', 'gift_desire'));
+//    if ($bContinue === false) {
+//        returnJson("Error: The required fields were not set correctly.");
+//    }
 
     // set easy vars
     $gift_id = $aPost['gift_id'];

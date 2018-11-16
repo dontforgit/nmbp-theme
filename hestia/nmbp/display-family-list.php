@@ -122,15 +122,16 @@ $iUserID = get_current_user_id();
 <?php
 global $wpdb;
 $sSQL = "SELECT * FROM wp_claimed  c
-        LEFT JOIN wp_gift g on c.gift_id = g.id
-        LEFT JOIN wp_users u on g. user_id = u.ID";
+        LEFT JOIN wp_users u on g.user_id = u.ID
+        WHERE c.active = 1 and u.ID = {$iUserID};";
 $aResults = $wpdb->get_results($sSQL);
 ?>
 <script type="text/javascript">
     jQuery(document).ready(function(){
         <?php foreach ($aResults as $oResult) : ?>
-            jQuery(".family-member-<?php echo str_replace(' ', '-', $oResult->display_name); ?>").css('background-color','rgba(7,86,0,0.15)');
+            jQuery(".family-member-<?php echo str_replace(' ', '-', $oResult->display_name); ?>").css('background-color','rgba(7,86,0,0.0.075)');
             jQuery(".this-is-gift-<?php echo $oResult->gift_id; ?>").css('background-color','rgba(7,86,0,0.075)');
+            console.log(".this-is-gift-<?php echo $oResult->gift_id; ?>");
             jQuery('.this-is-gift-<?php echo $oResult->gift_id; ?>').find('.dashicons').addClass('dashicons-yes').removeClass('.dashicons-lock').removeClass('.dashicons-plus');
         <?php endforeach; ?>
     });
